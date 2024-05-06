@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        #form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: row; /* Align items vertically */
+            align-items: center; /* Center items horizontally */
+            text-align: center; /* Center text inside the form */
+            display: flex;
+            
+            background-color: #f2f2f2;
+        }
+
+        .button-container{
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+        }
+
+
+        #id_users {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: linear-gradient(to right, #ff6ec4, #7873f5);
+            color: #fff;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; /* Remove underline from buttons */
+            text-align: center;
+        }
+
+        #all-images-container {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            justify-content: flex-start; /* Align images from left to right */
+        }
+
+        .image-container {
+            position: relative;
+            width: 150px; /* Set the desired width */
+            height: 150px; /* Set the desired height */
+            margin: 10px;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+            flex-shrink: 0; /* Prevent shrinking and maintain the specified width */
+            cursor: pointer;
+            display: inline-block
+        }
+
+        .image-container:hover,
+        .image-container.selected {
+            transform: scale(1.05);
+            z-index: 1; /* Ensure the selected image is on top of others */
+        }
+
+        .image-container img {
+            position: relative;
+            z-index: 0
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Crop the image to cover the container */
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .image-container.selected::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 5px solid #808080; /* Change the border color as desired */
+            border-radius: 8px;
+            pointer-events: none; /* Allow clicking through the border */
+        }
+
+        #image-preview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        #image-preview img {
+            max-width: 100%;
+            max-height: 400px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #image-preview img:hover {
+            transform: scale(1.1);
+        }
+
+        .send-button,
+        .back-button {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            background: linear-gradient(to right, #ff6ec4, #7873f5);
+            color: #fff;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; /* Remove underline from buttons */
+        }
+
+        .send-button:hover,
+        .back-button:hover {
+            background: linear-gradient(to right, #ff6ec4, #7873f5);
+            filter: brightness(1.1);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0, 0, 0);
+            background-color: rgba(0, 0, 0, 0.9);
+            padding-top: 60px;
+        }
+
+        .modal-content {
+            margin: auto;
+            display: block;
+            max-width: 800px;
+            max-height: 600px;
+        }
+
+        .close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: #fff;
+            font-size: 30px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .delete_button {
+            position: absolute; /* Set the position of the delete button to absolute */
+            top: 10px; /* Position the delete button at the top of the image container */
+            right: 10px; /* Position the delete button at the right of the image container */
+            color: red; /* Set the color of the delete button */
+            cursor: pointer; /* Change the cursor to a pointer on hover for better UX */
+            z-index: 1; /* Ensure the delete button appears above the image */
+            transition: transform 250ms;
+        }
+
+        .delete_button:hover {
+            transform:  scale(1.5);
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="form" method="post" enctype="multipart/form-data">
+        <button class="back-button" type="button" onclick="goBack()"><i class="fas fa-hand-point-left"></i>&nbsp; Go Back</button>
+
+        {% csrf_token %}
+        {{ form.users }}
+        <div style="display: none;">
+            {{ form.image }}
+        </div>
+        <button class="send-button"   name="send"><i class="fa fa-crop" aria-hidden="true"></i>&nbsp; Crop and Send</button>
+                
+
+    </form>
+
+    <div id="all-images-container"></div>
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img class="modal-content" id="modalImg">
+        <div id="caption"></div>
+    </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+        const baseMediaUrl = "/image_handling/media/";
+        const username = "{{ request.user.username }}";
+        const mediaUrl = `${baseMediaUrl}${username}/uploaded/`;
+
+    function loadImages(uploadedImages) {
+    const allImagesContainer = $('#all-images-container');
+    const imagePreview = $('#image-preview');
+
+    const imageNames = Object.keys(uploadedImages);
+    sessionStorage.setItem('temporaryImages', JSON.stringify(imageNames));
+
+    imageNames.forEach((imageName, index) => {
+        const imageContainer = $('<div class="image-container">');
+        const delete_button = $('<i class="fas fa-trash"></i>'); // Create the delete button with the delete-button class
+        delete_button.addClass('delete_button');
+        delete_button.click(() => deleteImage(imageName));
+        const img = $('<img>').attr({
+            src: uploadedImages[imageName], // Use the provided image URL directly
+            alt: imageName
+        }).click(function () {
+            openModal(imageName, uploadedImages[imageName]);
+        });
+
+        // Append the delete button and image to the image container
+        imageContainer.append(delete_button); // Append the delete button first to ensure it appears on top
+        imageContainer.append(img);
+
+        allImagesContainer.append(imageContainer);
+    });
+}
+
+        fetch(mediaUrl)
+            .then(response => response.json())
+            .then(data => loadImages(data.uploaded_images))
+            .catch(error => console.log(error));
+
+        window.addEventListener('beforeunload', () => {
+            sessionStorage.removeItem('temporaryImages');
+        });
+        
+        function openModal(imageName, imageUrl) {
+            const modal = $('#myModal');
+            const modalImg = $('#modalImg');
+
+            modalImg.attr('src', imageUrl); // Set the src attribute with the provided image URL
+
+            // Highlight the selected image in the modal
+            const selectedImage = $(`.image-container img[alt="${imageName}"]`);
+            selectedImage.addClass('modal-content-selected');
+
+            // Store the selected image name in session storage
+            sessionStorage.setItem('selectedImage', imageName);
+
+            modal.css('display', 'block');
+
+            modal.click(function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+        }
+        
+        function closeModal() {
+            $('#myModal').css('display', 'none');
+        
+            // Remove the highlight from all images when closing the modal
+            $('.image-container img').removeClass('modal-content-selected');
+        
+            // Restore the selected image in the image container
+            const selectedImageName = sessionStorage.getItem('selectedImage');
+            if (selectedImageName) {
+                updateSelectedImage(selectedImageName);
+            }
+        }
+        
+        function updateSelectedImage(imageName) {
+            const fieldElement = $('#id_image');
+        
+            if (fieldElement.length) {
+                const matchingOption = fieldElement.find(`option[value*="${imageName}"]`);
+        
+                if (matchingOption.length > 0) {
+                    fieldElement.val(matchingOption.val());
+        
+                    const imagePreview = $('#image-preview');
+                    imagePreview.empty(); // Clear previous preview
+        
+                    const selectedImage = $('<img>').attr({
+                        src: `data:image/png;base64,${matchingOption.data('imageData')}`,
+                        alt: matchingOption.val()
+                    });
+        
+                    imagePreview.append(selectedImage);
+        
+                    // Remove the 'selected' class from all image containers
+                    $('.image-container').removeClass('selected');
+        
+                    // Add the 'selected' class to the clicked image container
+                    const clickedImageContainer = $(`.image-container img[alt="${imageName}"]`).closest('.image-container');
+                    clickedImageContainer.addClass('selected');
+                }
+            }
+        }
+        
+        // Check if there is a selected image in session storage
+        const selectedImageName = sessionStorage.getItem('selectedImage');
+        if (selectedImageName) {
+            updateSelectedImage(selectedImageName);
+        }
+
+        function deleteImage(imageName) {
+            fetch(`/image_handling/delete/${username}/${imageName}/`).then(response => {
+               location.reload(); 
+            })
+        }
+    </script>
+
+</body>
+
+</html>

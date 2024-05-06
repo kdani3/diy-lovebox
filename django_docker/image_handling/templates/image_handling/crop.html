@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Cropping and Saving</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link href="https://unpkg.com/cropperjs@1.5.11/dist/cropper.min.css" rel="stylesheet">
+  <style>
+    #imageContainer {
+    width: 400px;
+    height: 500px;
+    overflow: hidden;
+    position: relative;
+    margin: 0 auto; /* Center the image horizontally */
+
+    }
+    #previewImage {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto; /* Center the image horizontally */
+    }
+
+    .send-button {
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        background: linear-gradient(to right, #ff6ec4, #7873f5);
+        color: #fff;
+        cursor: pointer;
+        font-family: Arial, sans-serif;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+        width: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none; /* Remove underline from buttons */
+        margin: 0 auto;
+    }
+
+    .send-button:hover {
+        background: linear-gradient(to right, #ff6ec4, #7873f5);
+        filter: brightness(1.1);
+    }
+
+  </style>
+</head>
+<body>
+  <div id="imageContainer">
+    <img id="previewImage" src="/image_handling/media/{{ selected_user }}/uncropped_image" alt="Selected Image">
+  </div>
+  <button onclick="rotateImageClockwise()">Rotate Clockwise</button>
+
+  <button class="send-button"  name="send" onclick="cropAndSave()"><i class="fas fa-paper-plane"></i>&nbsp; Send Cropped</button>
+  {% csrf_token %}
+  <script src="https://unpkg.com/cropperjs@1.5.11/dist/cropper.min.js"></script>
+  <script>
+    function rotateImageClockwise() {
+    // Adjust the aspect ratio and view mode to ensure the entire image is included
+ 
+
+    cropper.rotate(90); // Rotate the image by 90 degrees clockwise
+}
+    // Initialize Cropper.js when the image is loaded
+    var cropper = new Cropper(document.getElementById('previewImage'), {
+      aspectRatio: 128 / 160,
+      viewMode: 1,
+      autoCropArea: 1
+    });
+    document.getElementById('imageContainer').style.display = 'block'; // Display the image container
+
+    function cropAndSave() {
+      var croppedCanvas = cropper.getCroppedCanvas(); // Get the cropped image as a canvas
+
+      // Convert the canvas to a Blob (binary large object)
+      croppedCanvas.toBlob(function (blob) {
+        var formData = new FormData();
+        formData.append('croppedImage', blob, 'cropped.jpg');
+
+        // Send the cropped image data to the server using the fetch API
+        fetch(`/image_handling/save_cropped_image/{{ selected_user }}/`, { // Include selected user as a URL parameter
+        method: 'POST',
+        body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data); // Log the response from the server
+          // Additional handling of the server response if needed
+            window.location.href = '/accounts/profile';
+
+        })
+        .catch(error => {
+          console.error('Error:', error); // Log any errors
+        });
+      }, 'image/jpeg'); // Convert the canvas to a JPEG blob
+    }
+  </script>
+</body>
+</html>

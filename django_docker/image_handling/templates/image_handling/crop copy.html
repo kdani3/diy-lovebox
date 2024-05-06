@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Image Cropping and Saving</title>
+  <link href="https://unpkg.com/cropperjs@1.5.11/dist/cropper.min.css" rel="stylesheet">
+  <style>
+    #imageContainer {
+      width: 300px;
+      height: 375px;
+      overflow: hidden;
+      position: relative;
+    }
+    #previewImage {
+      display: block;
+      max-width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <input type="file" id="imageInput">
+  <div id="imageContainer">
+    <img id="previewImage" src="" alt="Selected Image">
+  </div>
+  <button onclick="cropAndSave()">Crop and Save</button>
+    {% csrf_token %}
+<script src="https://unpkg.com/cropperjs@1.5.11/dist/cropper.min.js"></script>
+  <script>
+    document.getElementById('imageInput').addEventListener('change', function(e) {
+      var file = e.target.files[0];
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('previewImage').src = e.target.result;
+        // Initialize Cropper.js when the image is loaded
+        var cropper = new Cropper(document.getElementById('previewImage'), {
+          aspectRatio: 128 / 160,
+          viewMode: 1,
+          autoCropArea: 1
+        });
+        document.getElementById('imageContainer').style.display = 'block'; // Display the image container
+      };
+      reader.readAsDataURL(file);
+    });
+
+function cropAndSave() {
+  var cropper = document.getElementById('previewImage').cropper;
+  var croppedCanvas = cropper.getCroppedCanvas(); // Get the cropped image as a canvas
+
+  // Convert the canvas to a Blob (binary large object)
+  croppedCanvas.toBlob(function (blob) {
+    var formData = new FormData();
+    formData.append('croppedImage', blob, 'cropped.jpg');
+
+    // Send the cropped image data to the server using the fetch API
+    fetch('/image_handling/save_cropped_image/', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data); // Log the response from the server
+      // Additional handling of the server response if needed
+    })
+    .catch(error => {
+      console.error('Error:', error); // Log any errors
+    });
+  }, 'image/jpeg'); // Convert the canvas to a JPEG blob
+}
+  </script>
+</body>
+</html>

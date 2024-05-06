@@ -1,0 +1,22 @@
+<!-- releases.html -->
+<h1>Releases</h1>
+
+
+<form action="{% url 'releases:upload_release' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="file" name="file">
+    <input type="submit" value="Upload">
+  </form>
+
+<table>
+  <tr>
+    <th>File</th>
+    <th>Upload Time</th>
+  </tr>
+  {% for release in releases %}
+  <tr>
+    <td><a href="{% url 'releases:download_release' release.file.name %}">{{ release.file.name  }}</a></td>
+    <td>{{ release.upload_time }}</td>
+  </tr>
+  {% endfor %}
+</table>

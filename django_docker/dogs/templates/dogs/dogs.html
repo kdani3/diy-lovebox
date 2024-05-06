@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Dogs for {{request.user}}</title>
+  <style>
+  .maincontent{
+    padding-top: 0%;
+    padding-left:0%;
+  }
+  
+  .col {
+    padding: 1%;
+  }
+  .col-lg{
+      height: 200px;
+      overflow: hidden;
+      margin: 10px 0;
+      position: relative;
+      flex-basis: 30%;
+  }
+  
+    /* Images crop and center to col-lg box up to 1000% centering (if 100% if it's 3x the size it doesn't fully center)Idk man why? projectors and stuff? */
+  .col-lg img{
+    display:block;
+      position: absolute;
+      left: -1000%;
+      right: -1000%;
+      top: -1000%;
+      bottom: -1000%;
+      margin: auto;
+      min-height: 100%;
+      min-width: 100%;
+  }
+  .imgrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .title-and-button {
+  display: flex;
+  flex-direction: column; /* Change to column to stack elements vertically */
+  align-items: center;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.Title {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0; /* Remove default margin */
+}
+
+.back-button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background: linear-gradient(to right, #ff6ec4, #7873f5);
+  color: #fff;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+    .back-button:hover {
+    background: linear-gradient(to right, #ff6ec4, #7873f5);
+    filter: brightness(1.1);
+    }
+
+    .fa {
+    margin-right: 5px;
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="maincontent">
+    <div class="title-and-button">
+  <h1 class="Title">Dogs for {{request.user}}</h1>
+  <button class="back-button"type="submit" onclick="goBack()"><i class="fas fa-solid fa-hand-point-left"></i>&nbsp; Go Back</button>
+  </div>
+  <div id="grid" class="imgrid"></div>
+</div>
+<script>
+function goBack() {
+  window.history.back();
+}//change the limit to however many images to use
+// Change the limit to the desired number of images to use
+const limit = 21;
+const url = `https://dog.ceo/api/breeds/image/random/${limit}`;
+
+fetch(url)
+  .then((response) => {
+    if (response.status === 404) {
+      throw new Error("Not Found");
+    }
+    return response.json();
+  })
+  .then((data) => {
+    let imagesData = data.message;
+    imagesData.forEach(function(imageURL) {
+      if (imageURL) {
+        let image = document.createElement('img');
+        image.src = imageURL;
+        
+        let gridCell = document.createElement('div');
+        gridCell.classList.add('col');
+        gridCell.classList.add('col-lg');
+        gridCell.appendChild(image);
+        
+        document.getElementById('grid').appendChild(gridCell);
+      }
+    });
+  })
+  .catch(function(error) {
+    console.log(error);
+  });
+</script>
+</body>
+</html>

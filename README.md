@@ -7,8 +7,8 @@ Hey, this project is about a diy version of the known lovebox gadget for your lo
 ```python -m venv venv```</br>
 3.Activate the venv 
 ```source venv/bin/activate```</br>
-4.Go into the django_docker dir and install the requirements.txt</br>
-```cd django_docker && pip install -r requirements.txt```
+4.Go into the django_docker dir and install the requirements.txt
+```cd django_docker && pip install -r requirements.txt```</br>
 5.run the following commands
 ```python manage.py makemigrations```
 ```python manage.py migrate```</br>

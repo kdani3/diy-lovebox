@@ -50,7 +50,7 @@ def send_image(request):
             selected_user = form.cleaned_data['users']
             # Get the uploaded image from the form
             image_path = form.cleaned_data['image']
-            
+
             with open(image_path, 'rb') as image_file:
             # Process the file as needed (e.g., save to another location)
             # In this example, it saves to the selected user's 'sent' folder
@@ -116,9 +116,8 @@ def upload_image(request):
                 converted_file = Path(temp_image.name)
 
                 # Save the image to the user's subfolder in the media directory
-                fs = FileSystemStorage(location=f'media/{request.user.username}/uploaded')
-                filename = fs.save(converted_file.name, converted_file.open('rb'))
-                uploaded_file_path = fs.url(filename)
+                img.save(f'media/{request.user.username}/uploaded/new.jpg', 'JPEG',optimize=True,quality=20)
+                uploaded_file_path = f'media/{request.user.username}/uploaded/new.jpg'
 
                 # Redirect to the profile page with a success message
                 messages.success(request, 'Image saved successfully.')
@@ -163,13 +162,12 @@ def save_cropped_image(request, selected_user):
         image = Image.open(cropped_image)
 
         # Perform the cropping operation
-        # (Assuming you already have the code for cropping)
         Image_resized_path=Path(f'media/{selected_user}/sent/resized_latest.jpg')
         if Image_resized_path.is_file():
             Path.unlink(Image_resized_path)
         # Resize the cropped image to 128x160
         resized_image = image.resize((128, 160))
-        
+
         # Save the resized image to the media directory
         image_path = f'{settings.MEDIA_ROOT}/{selected_user}/sent/resized_latest.jpg'  # Replace with the desired path
 
@@ -191,7 +189,7 @@ def Delete_uploaded_image(request, username, image):
     image_path = Path(f'media/{username}/uploaded/{image}')
     if image_path.is_file():
         Path.unlink(image_path)
-        
+
         return JsonResponse({'message': 'Cropped and resized image saved successfully'})
     else:
         return JsonResponse({'error': 'Invalid request'}, status=400)

@@ -1,6 +1,6 @@
 # Diy Lovebox 
  Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container running a django framework to be as portable as possible and also an esp8266 with a tft display and a servo.
- <p align="center"> <img src="https://github.com/kdani3/diy-lovebox/blob/main/assets/diy-lovebox-logo.svg" width="30%" /> <br>
+ <p align="center"> <img src="https://github.com/kdani3/diy-lovebox/blob/main/assets/diy-lovebox-logo.svg" width="40%" /> <br>
  <img alt="Static Badge"  src="https://img.shields.io/badge/LICENSE-MIT-green?style=for-the-badge">
 <img src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white">
 <img src="https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white">
@@ -33,7 +33,7 @@ python manage.py migrate
 ```
 python manage.py createsuperuser
 ```
-8.Test that everything works and login
+8. Test that everything works and login
 ```
 python manage.py runserver
 ```
@@ -45,9 +45,9 @@ I used a [cloudflare tunnel](https://www.cloudflare.com/products/tunnel/) on my 
 - The ESP8266 board can be bought [here](https://store.arduino.cc/products/nodemcu-esp8266)</br>
 - Finally,the servo I used is the SG90 Micro Servo and can be found [here](https://www.amazon.com/Miuzei-Helicopter-Airplane-Remote-Control/dp/B07NSVKZP7/ref=sr_1_1?sr=8-1)</br>
 - You will also need a way to power the arduino so plan accordingly</br>
-# Hardware Connections
+# Wiring
 The hardware that i mentioned above can be connected based on this schematic i have provided <img src="https://raw.githubusercontent.com/kdani3/django-lovebox/main/assets/Schematic.png"></br>
-Furthermore, the zip file contains the schematic,pcb design and gerber files for ordering the pcb or for the files to be tailored  depending on your needs.
+Furthermore, the zip file contains the schematic, pcb design and gerber files for ordering the pcb or for the files to be tailored  depending on your needs.
 # 3D Models
 You can find the heart to use with the servo from [clait's 3d model of the LoveBox](https://www.printables.com/en/model/156756-lovebox-clone-send-love-messages) 
 # TO DO

@@ -1,5 +1,6 @@
 # Diy Lovebox 
-Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container running a django framework to be as portable as possible and also an esp8266 with a tft display and a servo.
+ Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container running a django framework to be as portable as possible and also an esp8266 with a tft display and a servo.
+ <p align="center"> <img src="https://github.com/kdani3/diy-lovebox/blob/main/assets/diy-lovebox-logo.svg" width="30%" /> </p>
 
 1.To get started clone the repo and unzip it</br>
 
@@ -38,4 +39,4 @@ There are many things I would like to implement and improve</br>
 
 # Notes
 I will upload files of the working configuration once I return from my holidays. I designed the pcb while on holidays so I will order it and see if it is functional.</br>
-Please check out the amazing repos that gave me the inspiration at first hand [julissa99's Lovebox](https://github.com/julisa99/Lovebox) and [JulianBeaulieu's](https://github.com/JulianBeaulieu/DIY-LoveBox). Also, thanks to [clait](https://www.printables.com/@clait_237854) that I s̶t̶o̶l̶e̶ borrowed from their 3d model to use the heart with my servo.
+Please check out the amazing repos that gave me the inspiration at first hand [julissa99's Lovebox](https://github.com/julisa99/Lovebox) and [JulianBeaulieu's](https://github.com/JulianBeaulieu/DIY-LoveBox). Also, thanks to [clait](https://www.printables.com/@clait_237854) that I s̶t̶o̶l̶e̶ borrowed from their 3d model to use the heart with my servo. Last but not least, check out [Bodmer's TJpeg Decoder](https://github.com/Bodmer/TJpg_Decoder) that I used for fetching the jpeg to the Arduino esp8266

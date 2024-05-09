@@ -41,10 +41,10 @@ python manage.py runserver
 I used a [cloudflare tunnel](https://www.cloudflare.com/products/tunnel/) on my Rock64 to make the django container accessible to the esp boards outside of my LAN. If you wish you could also use the local IP of your docker container to communicate with an esp in your LAN, but i haven't tested that yet. 
 
 # Hardware
-The TFT LCD screen I used is the 1.8-inch 128x160 with the ST7735 board that can be found [here](https://www.amazon.com/M%C3%B3dulo-pantalla-pulgadas-ST7735-128x160/dp/B07BFV69DZ?language=en_US&currency=USD)</br>
-The ESP8266 board can be bought [here](https://store.arduino.cc/products/nodemcu-esp8266)</br>
-Finally,the servo I used is the SG90 Micro Servo and can be found [here](https://www.amazon.com/Miuzei-Helicopter-Airplane-Remote-Control/dp/B07NSVKZP7/ref=sr_1_1?sr=8-1)</br>
-You will also need a way to power the arduino so plan accordingly</br>
+- The TFT LCD screen I used is the 1.8-inch 128x160 with the ST7735 board that can be found [here](https://www.amazon.com/M%C3%B3dulo-pantalla-pulgadas-ST7735-128x160/dp/B07BFV69DZ?language=en_US&currency=USD)</br>
+- The ESP8266 board can be bought [here](https://store.arduino.cc/products/nodemcu-esp8266)</br>
+- Finally,the servo I used is the SG90 Micro Servo and can be found [here](https://www.amazon.com/Miuzei-Helicopter-Airplane-Remote-Control/dp/B07NSVKZP7/ref=sr_1_1?sr=8-1)</br>
+- You will also need a way to power the arduino so plan accordingly</br>
 # Hardware Connections
 The hardware that i mentioned above can be connected based on this schematic i have provided <img src="https://raw.githubusercontent.com/kdani3/django-lovebox/main/assets/Schematic.png"></br>
 Furthermore, the zip file contains the schematic,pcb design and gerber files for ordering the pcb or for the files to be tailored  depending on your needs.
@@ -52,11 +52,11 @@ Furthermore, the zip file contains the schematic,pcb design and gerber files for
 You can find the heart to use with the servo from [clait's 3d model of the LoveBox](https://www.printables.com/en/model/156756-lovebox-clone-send-love-messages) 
 # TO DO
 There are many things I would like to implement and improve</br>
-1. Implementing The Rest Api for improved security.</br>
-2. Maybe a GIF player?? (I'm not gonna sleep).<br>
-3. An auto update script for the esp boards that I'm not completely sure that is possible.</br>
-4. A 3D printed case for the hardware.</br>
-5. Many more that I'm going to think about down the road.
+- Implementing The Rest Api for improved security.</br>
+- Maybe a GIF player?? (I'm not gonna sleep).<br>
+- An auto update script for the esp boards that I'm not completely sure that is possible.</br>
+- A 3D printed case for the hardware.</br>
+- Many more that I'm going to think about down the road.
 
 # Notes
 I will upload files of the working configuration once I return from my holidays. I designed the pcb while on holidays so I will order it and see if it is functional.</br>

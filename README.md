@@ -23,4 +23,16 @@ The TFT LCD screen I used is the 1.8-inch 128x160 with the ST7735 board that can
 The ESP8266 board can be bought [here](https://store.arduino.cc/products/nodemcu-esp8266)</br>
 Finally,the servo I used is the SG90 Micro Servo and can be found [here](https://www.amazon.com/Miuzei-Helicopter-Airplane-Remote-Control/dp/B07NSVKZP7/ref=sr_1_1?sr=8-1)</br>
 You will also need a way to power the arduino so plan accordingly</br>
+# Hardware Connections
+The hardware that i mentioned above can be connected based on this schematic i have provided![Schematic For ESP, TFT, Servo](https://raw.githubusercontent.com/kdani3/django-lovebox/main/assets/Schematic.png)</br>
+Furthermore, the zip file contains the schematic,pcb design and gerber files for ordering the pcb or for the files to be tailored  depending on your needs.
+# TO DO
+There are many things I would like to implement and improve</br>
+1. Implementing The Rest Api for improved security.</br>
+2. Maybe a GIF player?? (I'm not gonna sleep).<br>
+3. An auto update script for the esp boards that I'm not completely sure that is possible.</br>
+4. A 3D printed case for the hardware.</br>
+5. Many more that I'm going to think about down the road.
 
+# Notes
+I will upload files of the working configuration once I go back to my house. I designed the pcb while on holidays so I will order it and see if it is functional.   

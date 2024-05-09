@@ -26,6 +26,8 @@ You will also need a way to power the arduino so plan accordingly</br>
 # Hardware Connections
 The hardware that i mentioned above can be connected based on this schematic i have provided![Schematic For ESP, TFT, Servo](https://raw.githubusercontent.com/kdani3/django-lovebox/main/assets/Schematic.png)</br>
 Furthermore, the zip file contains the schematic,pcb design and gerber files for ordering the pcb or for the files to be tailored  depending on your needs.
+# 3D Models
+You can find the heart to use with the servo from [clait's 3d model of the LoveBox](https://www.printables.com/en/model/156756-lovebox-clone-send-love-messages) 
 # TO DO
 There are many things I would like to implement and improve</br>
 1. Implementing The Rest Api for improved security.</br>
@@ -35,4 +37,5 @@ There are many things I would like to implement and improve</br>
 5. Many more that I'm going to think about down the road.
 
 # Notes
-I will upload files of the working configuration once I go back to my house. I designed the pcb while on holidays so I will order it and see if it is functional.   
+I will upload files of the working configuration once I return from my holidays. I designed the pcb while on holidays so I will order it and see if it is functional.</br>
+Please check out the amazing repos that gave me the inspiration at first hand [julissa99's Lovebox](https://github.com/julisa99/Lovebox) and [JulianBeaulieu's](https://github.com/JulianBeaulieu/DIY-LoveBox). Also, thanks to [clait](https://www.printables.com/@clait_237854) that I s̶t̶o̶l̶e̶ borrowed from their 3d model to use the heart with my servo.

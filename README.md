@@ -16,5 +16,10 @@ Hey, this project is about a diy version of the known lovebox gadget for your lo
 ```python manage.py createsuperuser```</br>
 7.Test that everything works and login
 ```python manage.py runserver```</br>
-8.If everything works as expected deploy the django docker, the default port i chose in the docker deploy file is *3030* you can change it to whatever you wish.
-# I'm going to continue with the instructions for the esp8266
+8.If everything works as expected deploy the django docker, the default port I chose in the docker deploy file is *3030* you can change it to whatever you wish.
+# Hardware
+The TFT LCD screen I used is the 1.8-inch 128x160 with the ST7735 board that can be found here [a link](https://www.amazon.com/M%C3%B3dulo-pantalla-pulgadas-ST7735-128x160/dp/B07BFV69DZ?language=en_US&currency=USD)</br>
+The ESP8266 board can be bought here [a link](https://store.arduino.cc/products/nodemcu-esp8266)</br>
+Finally,the servo I used is the SG90 Micro Servo and  can be found here [a link](https://www.amazon.com/Miuzei-Helicopter-Airplane-Remote-Control/dp/B07NSVKZP7/ref=sr_1_1?sr=8-1)</br>
+You will also need a way to power he arduino so plan accordingly</br>
+

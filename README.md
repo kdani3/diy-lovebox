@@ -59,5 +59,10 @@ There are many things I would like to implement and improve</br>
 - Many more that I'm going to think about down the road.
 
 # Notes
-I will upload files of the working configuration once I return from my holidays. I designed the pcb while on holidays so I will order it and see if it is functional.</br>
-Please check out the amazing repos that gave me the inspiration at first hand [julissa99's Lovebox](https://github.com/julisa99/Lovebox) and [JulianBeaulieu's](https://github.com/JulianBeaulieu/DIY-LoveBox). Also, thanks to [clait](https://www.printables.com/@clait_237854) that I s̶t̶o̶l̶e̶ borrowed from their 3d model to use the heart with my servo. Last but not least, check out [Bodmer's TJpeg Decoder](https://github.com/Bodmer/TJpg_Decoder) that I used for fetching the jpeg to the Arduino esp8266
+I will upload files of the working configuration once I return from my holidays. I designed the pcb while on holidays so I will order it and see if it is functional.
+# Code I s̶t̶o̶l̶e̶ borrowed
+- Please check out the amazing repos that gave me the inspiration at first hand
+  - [@julissa99's Lovebox](https://github.com/julisa99/Lovebox)
+  - [@JulianBeaulieu's version](https://github.com/JulianBeaulieu/DIY-LoveBox).
+- Also, thanks to [clait](https://www.printables.com/@clait_237854) that I borrowed from their 3d model to use the heart with my servo.
+- Last but not least, check out [@Bodmer's TJpeg Decoder](https://github.com/Bodmer/TJpg_Decoder) that I used for fetching the jpeg to the Arduino esp8266

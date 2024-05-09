@@ -25,7 +25,7 @@ The ESP8266 board can be bought [here](https://store.arduino.cc/products/nodemcu
 Finally,the servo I used is the SG90 Micro Servo and can be found [here](https://www.amazon.com/Miuzei-Helicopter-Airplane-Remote-Control/dp/B07NSVKZP7/ref=sr_1_1?sr=8-1)</br>
 You will also need a way to power the arduino so plan accordingly</br>
 # Hardware Connections
-The hardware that i mentioned above can be connected based on this schematic i have provided![Schematic For ESP, TFT, Servo](https://raw.githubusercontent.com/kdani3/django-lovebox/main/assets/Schematic.png)</br>
+The hardware that i mentioned above can be connected based on this schematic i have provided <img src="https://raw.githubusercontent.com/kdani3/django-lovebox/main/assets/Schematic.png"></br>
 Furthermore, the zip file contains the schematic,pcb design and gerber files for ordering the pcb or for the files to be tailored  depending on your needs.
 # 3D Models
 You can find the heart to use with the servo from [clait's 3d model of the LoveBox](https://www.printables.com/en/model/156756-lovebox-clone-send-love-messages) 

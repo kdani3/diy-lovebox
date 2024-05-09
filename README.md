@@ -1,29 +1,45 @@
 # Diy Lovebox 
  Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container running a django framework to be as portable as possible and also an esp8266 with a tft display and a servo.
  <p align="center"> <img src="https://github.com/kdani3/diy-lovebox/blob/main/assets/diy-lovebox-logo.svg" width="30%" /> <br>
- <img alt="Static Badge" src="https://img.shields.io/badge/LICENSE-MIT-green?style=for-the-badge&link=https%3A%2F%2Ftlo.mit.edu%2Fresearchers-mit-community%2Fprotect%2Fsoftware-open-source-protection">
+ <img alt="Static Badge"  src="https://img.shields.io/badge/LICENSE-MIT-green?style=for-the-badge">
 <img src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white">
 <img src="https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white">
  </p>
  
 # Get Started
-1.To get started clone the repo and unzip it</br>
+1. To get started clone the repo and unzip it</br>
 
-2.Inside the directory create a python venv 
-```python -m venv venv```</br>
-3.Activate the venv 
-```source venv/bin/activate```</br>
-4.Go into the django_docker dir and install the requirements.txt
-```cd django_docker && pip install -r requirements.txt```</br>
-5.run the following commands
-```python manage.py makemigrations```
-```python manage.py migrate```</br>
-6. Create the admin user 
-```python manage.py createsuperuser```</br>
-7.Test that everything works and login
-```python manage.py runserver```</br>
-8.If everything works as expected deploy the django docker, the default port I chose in the docker deploy file is *3030* you can change it to whatever you wish.
-I used a [cloudflare tunnel](https://www.cloudflare.com/products/tunnel/) on my Rock64 to make the django container accessible to the esp boards outside of my LAN. If you wish you could also use the local IP of your docker container to communicate with an esp in your LAN, but i haven't tested that yet.  
+2. Inside the directory create a python venv 
+```
+python -m venv venv
+```
+3. Activate the venv 
+```
+source venv/bin/activate
+```
+4. Go into the django_docker dir and install the requirements.txt
+```
+cd django_docker && pip install -r requirements.txt
+```
+5. Make the migrations for the django framework
+```
+python manage.py makemigrations
+```
+6. Migrate accordingly
+```
+python manage.py migrate
+```
+7. Create the admin user 
+```
+python manage.py createsuperuser
+```
+8.Test that everything works and login
+```
+python manage.py runserver
+```
+9. If everything works as expected deploy the django docker, the default port I chose in the docker deploy file is *3030* you can change it to whatever you wish.
+I used a [cloudflare tunnel](https://www.cloudflare.com/products/tunnel/) on my Rock64 to make the django container accessible to the esp boards outside of my LAN. If you wish you could also use the local IP of your docker container to communicate with an esp in your LAN, but i haven't tested that yet. 
+
 # Hardware
 The TFT LCD screen I used is the 1.8-inch 128x160 with the ST7735 board that can be found [here](https://www.amazon.com/M%C3%B3dulo-pantalla-pulgadas-ST7735-128x160/dp/B07BFV69DZ?language=en_US&currency=USD)</br>
 The ESP8266 board can be bought [here](https://store.arduino.cc/products/nodemcu-esp8266)</br>

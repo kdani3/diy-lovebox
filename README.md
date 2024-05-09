@@ -1,5 +1,5 @@
-# Django Lovebox Docker 
-Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container to be as portable as possible and also an esp8266 with a tft display and a servo.
+# Diy Lovebox 
+Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container running a django framework to be as portable as possible and also an esp8266 with a tft display and a servo.
 
 1.To get started clone the repo and unzip it</br>
 

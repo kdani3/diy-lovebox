@@ -1,7 +1,12 @@
 # Diy Lovebox 
  Hey, this project is about a diy version of the known lovebox gadget for your loved ones! It runs on a docker container running a django framework to be as portable as possible and also an esp8266 with a tft display and a servo.
- <p align="center"> <img src="https://github.com/kdani3/diy-lovebox/blob/main/assets/diy-lovebox-logo.svg" width="30%" /> </p>
-
+ <p align="center"> <img src="https://github.com/kdani3/diy-lovebox/blob/main/assets/diy-lovebox-logo.svg" width="30%" /> <br>
+ <img alt="Static Badge" src="https://img.shields.io/badge/LICENSE-MIT-green?style=for-the-badge&link=https%3A%2F%2Ftlo.mit.edu%2Fresearchers-mit-community%2Fprotect%2Fsoftware-open-source-protection">
+<img src="https://img.shields.io/badge/django-%23092E20.svg?style=for-the-badge&logo=django&logoColor=white">
+<img src="https://img.shields.io/badge/-Arduino-00979D?style=for-the-badge&logo=Arduino&logoColor=white">
+ </p>
+ 
+# Get Started
 1.To get started clone the repo and unzip it</br>
 
 2.Inside the directory create a python venv 

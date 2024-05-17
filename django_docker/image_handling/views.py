@@ -17,6 +17,9 @@ import base64
 import tempfile
 from io import BytesIO
 import json
+import random
+import string
+import time
 
 image_accessed = False  # Flag to track image access
 
@@ -115,9 +118,14 @@ def upload_image(request):
                 # Create a pathlib Path object with the temporary file
                 converted_file = Path(temp_image.name)
 
+                random_string = ''.join(random.choices(string.ascii_letters + string.digits, k=6))
+
+                # Combine username, timestamp, and random string for a unique name
+                image_name = f'{request.user.username}_{int(time.time())}_{random_string}.jpg'
+
                 # Save the image to the user's subfolder in the media directory
-                img.save(f'media/{request.user.username}/uploaded/new.jpg', 'JPEG',optimize=True,quality=20)
-                uploaded_file_path = f'media/{request.user.username}/uploaded/new.jpg'
+                img.save(f'media/{request.user.username}/uploaded/{image_name}', 'JPEG',optimize=True,quality=20)
+                uploaded_file_path = f'media/{request.user.username}/uploaded/{image_name}'
 
                 # Redirect to the profile page with a success message
                 messages.success(request, 'Image saved successfully.')

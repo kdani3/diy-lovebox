@@ -53,49 +53,63 @@ bool tft_output(int16_t x, int16_t y, uint16_t w, uint16_t h, uint16_t* bitmap)
   // Return 1 to decode next block
   return 1;
 }
-
 void setup()
 {
   Serial.begin(115200);
   Serial.println("\n\n Testing TJpg_Decoder library");
-
+    tft.begin();
+    tft.fillScreen(TFT_BLACK);
+    tft.setRotation(1);
+    TJpgDec.setJpgScale(1);
+    TJpgDec.setSwapBytes(true);
+    TJpgDec.setCallback(tft_output);
+    servo.attach(D1); 
     // Initialise LittleFS
     if (!LittleFS.begin()) {
       Serial.println("LittleFS initialisation failed!");
       while (1) yield(); // Stay here twiddling thumbs waiting
     }
     Serial.println("\r\nInitialisation done.");
-    servo.attach(D1); 
-    // Initialise the TFT
-    tft.begin();
-    tft.fillScreen(TFT_BLACK);
-    tft.setRotation(1);
-    //tft.setTextFont(1);
-    tft.setCursor(50, 0);
-    tft.setTextFont(2);
-    tft.setTextSize(1);
-    tft.setTextColor(TFT_RED, TFT_BLACK);
-    tft.print("Lovebox\n");
-    tft.setTextColor(TFT_WHITE, TFT_BLACK);
-    tft.println("Initialising");
-    tft.println();
-    // The jpeg image can be scaled by a factor of 1, 2, 4, or 8
-    TJpgDec.setJpgScale(1);
-  
-    // The byte order can be swapped (set true for TFT_eSPI)
-    TJpgDec.setSwapBytes(true);
-  
-    // The decoder must be given the exact name of the rendering function above
-    TJpgDec.setCallback(tft_output);
-    
     WiFi.begin(WIFI_SSID, PASSWORD);
+    tft.setCursor(0, 50);
+    tft.fillScreen(TFT_BLACK);
     tft.setTextColor(TFT_WHITE, TFT_BLACK);
     tft.println("Checking Wi-Fi Connection  ");
+    
     while (WiFi.status() != WL_CONNECTED) {
       delay(1000);
       Serial.print(".");
     
     }
+    tft.setCursor(0, 60);
+    tft.println("Wi-Fi Connected");
+    delay(2000);
+    tft.setRotation(0);
+    if (!LittleFS.exists("/logo.jpg")) {
+       uint32_t t = millis();
+       bool loaded_ok = getFile("https://raw.githubusercontent.com/kdani3/diy-lovebox/main/assets/diy-lovebox-logo-black-160x128.jpg", "/logo.jpg");
+       t = millis() - t;
+       if (loaded_ok) { Serial.print(t); Serial.println(" ms to download"); }
+    }
+    TJpgDec.drawFsJpg(0, 0, "/logo.jpg", LittleFS);
+    delay(5000);
+    tft.setRotation(1);
+
+    //tft.setTextFont(1);
+    //tft.fillScreen(TFT_BLACK);
+    tft.setCursor(50, 0);
+    tft.setTextFont(2);
+    tft.setTextSize(1);
+    tft.setTextColor(TFT_RED);
+    tft.print("Lovebox\n");
+    delay(1000);
+    tft.setCursor(50, 100);
+    tft.setTextColor(TFT_WHITE);
+    tft.println("Initialising");
+    tft.println();
+    delay(3000);
+
+  
     tft.fillScreen(TFT_BLACK);
     tft.setRotation(0);
 
